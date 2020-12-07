@@ -99,8 +99,8 @@ jest.mock("axios", () => ({
 describe('Posts', () => {
 
     const wrapper = mount(Posts, {router, store, localVue});
-
-    it('1 == 1', function () {
-        expect(true).toBe(true)
+    
+    it('testingPostNumbers', function () {
+        expect(testData.length).toBe(wrapper.findAllComponents(Posts).length)
     });
 });
