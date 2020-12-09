@@ -44,7 +44,6 @@ describe('Header', () => {
 
     // Test
     it('should display logo', function () {
-
         let img = wrapper.find('.logo-container img');
         expect(img.exists()).toBe(true);
 

@@ -2,6 +2,7 @@ import {mount, createLocalVue} from '@vue/test-utils'
 import Vuex from 'vuex'
 import VueRouter from 'vue-router'
 import Posts from "../../src/components/Posts.vue";
+import moment from 'moment';
 
 const localVue = createLocalVue();
 
@@ -97,10 +98,45 @@ jest.mock("axios", () => ({
 }));
 
 describe('Posts', () => {
-
     const wrapper = mount(Posts, {router, store, localVue});
-    
+
     it('testingPostNumbers', function () {
-        expect(testData.length).toBe(wrapper.findAllComponents(Posts).length)
+        let posts = wrapper.findAll('.post');
+        expect(testData.length).toEqual(posts.length);
     });
+
+    it('test media type', function (){
+        let posts = wrapper.findAll('.post');
+        for (let index = 0; index < posts.length; index++) {
+            const element = posts.at(index);
+            if(element.contains('.post-image')){
+               if(wrapper.vm.posts[index].media.type =='image'){
+                   expect(element.contains('.post-image img')).toBe(true)
+               }
+              else if(wrapper.vm.posts[index].media.type =='video'){
+                expect(element.contains('.post-image video')).toBe(true)
+            }
+                
+            }
+           else{
+               expect(!element.contains('.post-image')).toBe(true);
+           }
+            
+        }
+    });
+
+    it('test date format', function (){
+        let posts = wrapper.findAll('.post');
+        for (let index = 0; index < posts.length; index++) {
+            const post = posts.at(index);
+            let date = wrapper.vm.posts[index].createTime
+            let formatted = moment(date).format('LLLL')
+            let ogdate = wrapper.find('.post-author > small').text();
+            expect(formatted).toEqual(ogdate);
+        }
+
+    });
+
+
 });
+

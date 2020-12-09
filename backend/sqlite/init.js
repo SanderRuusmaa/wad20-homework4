@@ -141,6 +141,7 @@ db.serialize(() => {
         .run(`INSERT INTO follow (id, user_id, follower_id) VALUES (?, ?, ?);`, [1, 2, 1])
         .run(`INSERT INTO follow (id, user_id, follower_id) VALUES (?, ?, ?);`, [2, 3, 1])
         .run(`INSERT INTO follow (id, user_id, follower_id) VALUES (?, ?, ?);`, [5, 1, 2])
+        .run(`INSERT INTO follow (id, user_id, follower_id) VALUES (?, ?, ?);`, [3, 5, 1])
         .run(`INSERT INTO post_like (id, user_id, post_id) VALUES (?, ?, ?);`, [1, 3, 1])
         .run(`INSERT INTO post_like (id, user_id, post_id) VALUES (?, ?, ?);`, [2, 1, 2])
         .run(`INSERT INTO post_like (id, user_id, post_id) VALUES (?, ?, ?);`, [3, 2, 1]);
